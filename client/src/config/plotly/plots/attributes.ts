@@ -1,10 +1,11 @@
 //Ref : https://plot.ly/javascript/reference/#scatter-marker
 
-import {Constants} from '../../../constants';
+import {Constants} from '../../constants';
+import {fontAttributes} from './font-attributes';
 const extendFlat = require('../../../../../node_modules/plotly.js/src/lib/extend').extendFlat;
 
 
-module.exports = {
+export const defaultAttributes = {
   x: [], //Array of numbers
   x0: 0, //Number or categorical coordinate string,
   dx: 1, //Number, default 1
@@ -50,12 +51,7 @@ module.exports = {
     }
   ),
   textposition: 'middle center', //'top left', 'top center', 'top right', 'middle left', 'middle center', 'middle right', 'bottom left', 'bottom center', 'bottom right'
-  textfont: {
-    family: Constants.FONT_FAMILY,
-    size: Constants.FONT_SIZE,
-    color: Constants.COLOR_PRIMARY,
-    description: ''
-  },
+  textfont: fontAttributes,
 
   r: [], //Sets the radial coordinates. Polar charts only.
   t: [] //Sets the angular coordinates. Polar charts only.
