@@ -14,6 +14,12 @@ const irisData = require('../../../../static/data/iris.json');
 const mapData = require('../../../../static/data/map-data.json');
 const imdbData: imbdData[] = require('../../../../static/data/imdb_data.json').sort((a, b) => parseInt(a.title_year) - parseInt(b.title_year));
 
+
+/* Importing charts */
+
+import {drawLinechart} from '../home/charts/line-chart/core/line-chart';
+
+
 @autoinject()
 export class Home {
 
@@ -36,11 +42,11 @@ export class Home {
 
   attached() {
     this.transformedData = this.dataConverters.lineChartDataGenerator(irisData);
-    this.drawLinechart();
+    this.drawLinechartGen();
   }
 
 
-  drawLinechart() {
+  drawLinechartGen() {
 
     const petalWidthTrace = {
       x: this.transformedData.petalLengthArray.sort((a, b) => a - b),
@@ -69,8 +75,7 @@ export class Home {
 
     const data = [petalWidthTrace, sepalWidthTrace];
 
-    Plotly.newPlot(this.chartContainer, data, this.layoutOptions, PlotConfig);
-
+    drawLinechart(this.chartContainer, data);
   }
 
 
@@ -84,12 +89,6 @@ export class Home {
 
     const data = [trace1];
 
-    /*const layout = {
-     title: 'Marker Size',
-     showlegend: false,
-     height: 600,
-     width: 600
-     };*/
 
     Plotly.newPlot(this.chartContainer, data, this.layoutOptions);
 

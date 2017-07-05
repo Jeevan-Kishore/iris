@@ -29,6 +29,6 @@ const LayoutAttributes = {
   hidesources: false,
   smith: false,
   showlegend: true,
-}
+};
 
 export {LayoutAttributes};
