@@ -1,7 +1,14 @@
+import {autoinject} from "aurelia-framework";
+import {DialogService} from "aurelia-dialog";
+import {SaveDataSource} from "./modals/save-data-source";
+
 interface DataSourceItem {
   name: string;
   image: string;
+  connector?: string;
 }
+
+@autoinject()
 export class AddDataSource {
 
   files: DataSourceItem[] = [
@@ -25,7 +32,8 @@ export class AddDataSource {
   databases: DataSourceItem[] = [
     {
       name: 'MySQL',
-      image: 'mysql.png'
+      image: 'mysql.png',
+      connector: 'mysql'
     },
     {
       name: 'MariaDB',
@@ -56,5 +64,21 @@ export class AddDataSource {
       image: 'apache_drill.png'
     }
   ];
+
+  dialogService: DialogService;
+
+  constructor(dialogService: DialogService) {
+    this.dialogService = dialogService;
+  }
+
+  saveDataSourceModal(dataSource: DataSourceItem) {
+    this.dialogService.open({
+      viewModel: SaveDataSource,
+      model: {
+        name: dataSource.name,
+        connector: dataSource.connector
+      }
+    })
+  }
 
 }
